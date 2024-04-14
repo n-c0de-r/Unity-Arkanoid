@@ -1,24 +1,45 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Responsible of the paddle movement in game.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class PaddleMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D _paddleBody;
+    #region Serialized Fields
+
+    [SerializeField] private Rigidbody2D paddleBody;
     [SerializeField] private float moveSpeed = 10f;
+
+    #endregion
+
+
+    #region Fields
+
     private Vector2 _moveVector = Vector2.zero;
     private InputActions _inputs;
+
+    #endregion
+
+
+    #region Unity Built-Ins
 
     private void Awake()
     {
         _inputs = new InputActions();
-        TryGetComponent(out _paddleBody);
+        TryGetComponent(out paddleBody);
     }
 
     private void FixedUpdate()
     {
-        _paddleBody.velocity = moveSpeed * _moveVector;
+        paddleBody.velocity = moveSpeed * _moveVector;
     }
+
+    #endregion
+
+
+    #region Unity Events
 
     private void OnEnable()
     {
@@ -43,4 +64,6 @@ public class PaddleMovement : MonoBehaviour
     {
         _moveVector = Vector2.zero;
     }
+
+    #endregion
 }

@@ -15,13 +15,15 @@ public class LevelData : ScriptableObject
         "Each level consists of up to 6 rows.")]
     [SerializeField] private Row[] rows;
 
-    #endregion Serialized Fields
+    #endregion
+
 
     #region GetSets
 
     public Row[] Rows { get => rows; }
 
-    #endregion GetSets
+    #endregion
+
 
     #region InnerStructs
 
@@ -37,5 +39,5 @@ public class LevelData : ScriptableObject
         public readonly BrickData[] Bricks { get => bricks; }
     }
 
-    #endregion InnerStructs
+    #endregion
 }
