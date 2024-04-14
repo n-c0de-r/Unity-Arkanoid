@@ -8,7 +8,7 @@ public class BallMovement : MonoBehaviour
 
     private void Awake()
     {
-        if (_ballBody == null) _ballBody = GetComponent<Rigidbody2D>();
+        TryGetComponent(out _ballBody);
     }
 
     private void FixedUpdate()

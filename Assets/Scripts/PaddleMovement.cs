@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class PaddleMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D _playerBody;
+    [SerializeField] private Rigidbody2D _paddleBody;
     [SerializeField] private float moveSpeed = 10f;
     private Vector2 _moveVector = Vector2.zero;
     private InputActions _inputs;
@@ -12,12 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _inputs = new InputActions();
-        if (_playerBody == null) _playerBody = GetComponent<Rigidbody2D>();
+        TryGetComponent(out _paddleBody);
     }
 
     private void FixedUpdate()
     {
-        _playerBody.velocity = moveSpeed * _moveVector;
+        _paddleBody.velocity = moveSpeed * _moveVector;
     }
 
     private void OnEnable()
