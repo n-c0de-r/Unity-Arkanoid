@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         inputs = new InputActions();
+        if (playerBody == null) playerBody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
