@@ -17,13 +17,25 @@ public class BrickData : ScriptableObject
     [SerializeField] private Color color;
 
     [Tooltip("The number of hits this brick element takes before it is destroyed.")]
-    [SerializeField][Range(1, 6)] private uint life;
+    [SerializeField][Range(1, 6)] private byte life;
 
     [Tooltip("Specifies if this brick element can destroyed.")]
     [SerializeField] private bool isDestructable;
 
     [Tooltip("The buff/nerf this brick element may give when destroyed.")]
     [SerializeField] private string possibleBuff, possibleNerf;
+
+    #endregion
+
+
+    #region GetSets
+
+    public GameObject Prefab => prefab;
+    public Color Color => color;
+    public byte Life => life;
+    public bool Destructable => isDestructable;
+    public string Buff => possibleBuff;
+    public string Nerf => possibleNerf;
 
     #endregion
 }

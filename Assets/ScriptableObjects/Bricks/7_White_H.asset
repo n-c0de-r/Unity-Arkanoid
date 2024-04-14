@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7_White_H
   m_EditorClassIdentifier: 
   prefab: {fileID: 3736744759905881818, guid: 3944fb9604816c04b95f1d2a3b342705, type: 3}
-  color: {r: 1, g: 1, b: 1, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
   life: 1
   isDestructable: 0
   possibleBuff: 

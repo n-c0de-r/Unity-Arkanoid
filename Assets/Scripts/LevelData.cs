@@ -20,7 +20,7 @@ public class LevelData : ScriptableObject
 
     #region GetSets
 
-    public Row[] Rows { get => rows; }
+    public Row[] Rows => rows;
 
     #endregion
 

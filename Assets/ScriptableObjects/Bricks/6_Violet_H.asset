@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 6_Violet_H
   m_EditorClassIdentifier: 
   prefab: {fileID: 7912396968660424224, guid: 4a5e99622b522304f8412a74a11baab6, type: 3}
-  color: {r: 0.4509804, g: 0.16078432, b: 0.50980395, a: 0}
+  color: {r: 0.4509804, g: 0.16078432, b: 0.50980395, a: 1}
   life: 6
   isDestructable: 1
   possibleBuff: 

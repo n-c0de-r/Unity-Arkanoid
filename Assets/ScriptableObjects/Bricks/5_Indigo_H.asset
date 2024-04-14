@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5_Indigo_H
   m_EditorClassIdentifier: 
   prefab: {fileID: 7912396968660424224, guid: 4a5e99622b522304f8412a74a11baab6, type: 3}
-  color: {r: 0.14117648, g: 0.2509804, b: 0.5568628, a: 0}
+  color: {r: 0.14117648, g: 0.2509804, b: 0.5568628, a: 1}
   life: 5
   isDestructable: 1
   possibleBuff: 

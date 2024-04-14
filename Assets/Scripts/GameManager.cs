@@ -7,12 +7,20 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     #region Serialized Fields
+    [Header("Level related values")]
 
     [Tooltip("All levels of this game.")]
     [SerializeField] private LevelData[] levels;
 
     [Tooltip("The currently played level.")]
-    [SerializeField] private uint currentLevel;
+    [SerializeField][Range(1,99)] private byte currentLevel;
+
+    [Space]
+    [Header("Gameplay related objects")]
+
+    [SerializeField] private Transform brickContainer;
+
+    [Space]
 
     #endregion
 
@@ -29,7 +37,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SpawnBricks(levels[0]);
     }
 
     // Update is called once per frame
@@ -38,5 +46,25 @@ public class GameManager : MonoBehaviour
         
     }
 
+    #endregion
+
+
+    #region Methods
+
+    private void SpawnBricks(LevelData data)
+    {
+        for (int i = 0; i < data.Rows.Length; i++)
+        {
+            int midPoint = data.Rows[i].Bricks.Length / 2;
+
+            for (int j = -midPoint; j < midPoint; j++)
+            {
+                BrickData piece = data.Rows[i].Bricks[j+midPoint];
+                GameObject brick = Instantiate(piece.Prefab, brickContainer);
+                brick.transform.position = new Vector2((j * brick.transform.localScale.x), (5-i * 2 * brick.transform.localScale.y) - brick.transform.localScale.y/2 - 0.1f);
+                brick.GetComponent<SpriteRenderer>().color = piece.Color;
+            }
+        }
+    }
     #endregion
 }
