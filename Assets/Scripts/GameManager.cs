@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnBricks(levels[0]);
+        //SpawnBricks(levels[0]);
     }
 
     // Update is called once per frame
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             {
                 BrickData piece = data.Rows[i].Bricks[j+midPoint];
                 GameObject brick = Instantiate(piece.Prefab, brickContainer);
-                brick.transform.position = new Vector2((j * brick.transform.localScale.x), (5-i * 2 * brick.transform.localScale.y) - brick.transform.localScale.y/2 - 0.1f);
+                brick.transform.position = new Vector2((j * brick.transform.localScale.x) + brick.transform.localScale.x / 2, (5-i * brick.transform.localScale.y) - brick.transform.localScale.y/2 - 0.1f);
                 brick.GetComponent<SpriteRenderer>().color = piece.Color;
             }
         }
