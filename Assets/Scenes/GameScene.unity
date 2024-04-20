@@ -135,7 +135,7 @@ GameObject:
   m_Layer: 0
   m_Name: BrickContainer
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 57009186}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalPosition: {x: -7, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -163,8 +163,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 309178964}
-  - component: {fileID: 309178963}
   - component: {fileID: 309178965}
+  - component: {fileID: 309178963}
   m_Layer: 0
   m_Name: Playfield
   m_TagString: Untagged
@@ -246,9 +246,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: b5d08862549594544b6dece9831ecc67, type: 2}
+  - {fileID: 11400000, guid: cd8ac8adcc9c16b4db571b38af465a1d, type: 2}
+  - {fileID: 11400000, guid: 494a39861d76e2c45a6c43019f3820be, type: 2}
+  - {fileID: 11400000, guid: db147cc4e033f9a429416ceba696e1ab, type: 2}
+  - {fileID: 11400000, guid: 5f2920385164a4e49a16eeee3dfcc4f1, type: 2}
+  - {fileID: 11400000, guid: 1cfb6ec60f7d6284ca07d5da07d64825, type: 2}
+  - {fileID: 11400000, guid: 60e5a85fed20b6a4cb689063e2511444, type: 2}
+  - {fileID: 11400000, guid: 05f7d3f94af1e0643a9cedc892502722, type: 2}
+  - {fileID: 11400000, guid: a08d49e797ee8c3429f1d8d74aa23a06, type: 2}
   currentLevel: 1
-  brickContainer: {fileID: 0}
+  brickContainer: {fileID: 57009187}
+  brickPrefab: {fileID: 7912396968660424224, guid: 4a5e99622b522304f8412a74a11baab6, type: 3}
+  anglePrefab: {fileID: 3736744759905881818, guid: 3944fb9604816c04b95f1d2a3b342705, type: 3}
+  bouncerPrefab: {fileID: 3996492358134286784, guid: 212fe3d41b2ab824a95721f8ff5f6ace, type: 3}
+  brickOffset: {x: 1.05, y: 1.05}
 --- !u!1001 &339455582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9126633489753579818, guid: f9f88a35d8602174c9d21e691ee2b516, type: 3}
       propertyPath: m_BodyType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9126633489753579818, guid: f9f88a35d8602174c9d21e691ee2b516, type: 3}
       propertyPath: m_Simulated

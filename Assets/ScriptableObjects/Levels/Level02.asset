@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65e434f0f72b88b44be4b9adeef5ab98, type: 3}
-  m_Name: 2_Orange_H
+  m_Script: {fileID: 11500000, guid: 206dc6c33f449a846917d7e3b3f05b48, type: 3}
+  m_Name: Level02
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7912396968660424224, guid: 4a5e99622b522304f8412a74a11baab6, type: 3}
-  color: {r: 1, g: 0.54901963, b: 0, a: 1}
-  life: 2
-  isDestructable: 1
-  possibleBuff: 
-  possibleNerf: 
+  data: '-111111-;
+
+    >------<;
+
+    -;
+
+    -111111-;'

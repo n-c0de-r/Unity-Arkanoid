@@ -12,32 +12,19 @@ public class LevelData : ScriptableObject
     #region Serialized Fields
 
     [Tooltip("All rows of bricks in a level.\n" +
-        "Each level consists of up to 6 rows.")]
-    [SerializeField] private Row[] rows;
+        "Each level consists of up to 6 rows.\n" +
+        "Each row consists of up to 8 bricks.")]
+    [TextArea(6, 10)]
+    [SerializeField] private string data;
 
     #endregion
 
 
     #region GetSets
 
-    public Row[] Rows => rows;
-
-    #endregion
-
-
-    #region InnerStructs
-
-    /// <summary>
-    /// Represents the row of <see cref="BrickData" />.
-    /// </summary>
-    [Serializable]
-    public struct Row
-    {
-        [Tooltip("All bricks in a row.\n" +
-        "Each row consists of up to 8 bricks.")]
-        [SerializeField] private BrickData[] bricks;
-        public readonly BrickData[] Bricks { get => bricks; }
-    }
+    public string Data => data;
+    
+    public string[] Rows => data.Split(';');
 
     #endregion
 }

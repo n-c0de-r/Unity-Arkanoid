@@ -13,12 +13,28 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelData[] levels;
 
     [Tooltip("The currently played level.")]
-    [SerializeField][Range(1,99)] private byte currentLevel;
+    [SerializeField][Range(1,10)] private byte currentLevel;
 
     [Space]
     [Header("Gameplay related objects")]
 
+    [Tooltip("The game object holding all the brick elements.")]
     [SerializeField] private Transform brickContainer;
+
+    [Tooltip("The game object representing a brick.")]
+    [SerializeField] private GameObject brickPrefab;
+
+    [Tooltip("The game object representing an angle.")]
+    [SerializeField] private GameObject anglePrefab;
+
+    [Tooltip("The game object representing a bouncer.")]
+    [SerializeField] private GameObject bouncerPrefab;
+
+    [Space]
+    [Header("Gameplay related information")]
+
+    [Tooltip("The vector representing the spacing between bricks.")]
+    [SerializeField] private Vector2 brickOffset;
 
     [Space]
 
@@ -37,7 +53,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //SpawnBricks(levels[0]);
+        SetupLevel(levels[currentLevel-1]);
     }
 
     // Update is called once per frame
@@ -51,20 +67,73 @@ public class GameManager : MonoBehaviour
 
     #region Methods
 
-    private void SpawnBricks(LevelData data)
+    private void SetupLevel(LevelData data)
     {
-        for (int i = 0; i < data.Rows.Length; i++)
-        {
-            int midPoint = data.Rows[i].Bricks.Length / 2;
+        string[] rows = data.Rows;
 
-            for (int j = -midPoint; j < midPoint; j++)
+        for (int rowNr = 0; rowNr < rows.Length; rowNr++)
+        {
+            char[] bricks = rows[rowNr].Trim().ToCharArray();
+
+            for (int brickNr = 0; brickNr < bricks.Length; brickNr++)
             {
-                BrickData piece = data.Rows[i].Bricks[j+midPoint];
-                GameObject brick = Instantiate(piece.Prefab, brickContainer);
-                brick.transform.position = new Vector2((j * brick.transform.localScale.x) + brick.transform.localScale.x / 2, (5-i * brick.transform.localScale.y) - brick.transform.localScale.y/2 - 0.1f);
-                brick.GetComponent<SpriteRenderer>().color = piece.Color;
+                switch (bricks[brickNr])
+                {
+                    case '-':
+                        continue;
+
+                    case 'B':
+                        SpawnBrick(rowNr, brickNr, 7, false);
+                        break;
+
+                    case 'O':
+                        SpawnBouncer(rowNr, brickNr);
+                        break;
+
+                    case '^':
+                        SpawnAngle(rowNr, brickNr);
+                        break;
+
+                    case '<':
+                        SpawnAngle(rowNr, brickNr, 90);
+                        break;
+
+                    case 'v':
+                        SpawnAngle(rowNr, brickNr, 180);
+                        break;
+
+                    case '>':
+                        SpawnAngle(rowNr, brickNr, 270);
+                        break;
+
+                    default:
+                        SpawnBrick(rowNr, brickNr, bricks[brickNr], true);
+                        break;
+                }
             }
         }
     }
+
+    private void SpawnBrick(int row, int position, int brickValue, bool destructable)
+    {
+        GameObject instance = Instantiate(brickPrefab, brickContainer);
+        instance.transform.position = (new Vector2(position * instance.transform.localScale.x, -row * instance.transform.localScale.y - 0.1f * row) + (Vector2)brickContainer.transform.position) * brickOffset;
+        Brick brick = instance.GetComponent<Brick>();
+        brick.Setup(brickValue, destructable);
+    }
+
+    private void SpawnAngle(int row, int position, int rotation = 0)
+    {
+        GameObject instance = Instantiate(anglePrefab, brickContainer);
+        instance.transform.position = (new Vector2(position * instance.transform.localScale.x, -row * instance.transform.localScale.y - 0.1f * row) + (Vector2)brickContainer.transform.position) * brickOffset;
+        instance.transform.eulerAngles = new Vector3Int(0, 0, rotation);
+    }
+
+    private void SpawnBouncer(int row, int position)
+    {
+        GameObject instance = Instantiate(bouncerPrefab, brickContainer);
+        instance.transform.position = (new Vector2(position * instance.transform.localScale.x, -row * instance.transform.localScale.y - 0.1f * row) + (Vector2)brickContainer.transform.position) * brickOffset;
+    }
+
     #endregion
 }
