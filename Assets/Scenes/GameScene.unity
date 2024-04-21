@@ -247,16 +247,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - {fileID: 11400000, guid: cd8ac8adcc9c16b4db571b38af465a1d, type: 2}
+  - {fileID: 11400000, guid: 0aebf61337142564b802c91a98279417, type: 2}
   - {fileID: 11400000, guid: 494a39861d76e2c45a6c43019f3820be, type: 2}
   - {fileID: 11400000, guid: db147cc4e033f9a429416ceba696e1ab, type: 2}
-  - {fileID: 11400000, guid: 5f2920385164a4e49a16eeee3dfcc4f1, type: 2}
   - {fileID: 11400000, guid: 1cfb6ec60f7d6284ca07d5da07d64825, type: 2}
+  - {fileID: 11400000, guid: 5f2920385164a4e49a16eeee3dfcc4f1, type: 2}
   - {fileID: 11400000, guid: 60e5a85fed20b6a4cb689063e2511444, type: 2}
   - {fileID: 11400000, guid: 05f7d3f94af1e0643a9cedc892502722, type: 2}
   - {fileID: 11400000, guid: a08d49e797ee8c3429f1d8d74aa23a06, type: 2}
   currentLevel: 1
   brickContainer: {fileID: 57009187}
   brickPrefab: {fileID: 7912396968660424224, guid: 4a5e99622b522304f8412a74a11baab6, type: 3}
+  blockPrefab: {fileID: 6994326686658851884, guid: a39d35a9d77eb6b4d9ebce4bd88a68d2, type: 3}
   anglePrefab: {fileID: 3736744759905881818, guid: 3944fb9604816c04b95f1d2a3b342705, type: 3}
   bouncerPrefab: {fileID: 3996492358134286784, guid: 212fe3d41b2ab824a95721f8ff5f6ace, type: 3}
   brickOffset: {x: 1.05, y: 1.05}

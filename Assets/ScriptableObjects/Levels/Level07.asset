@@ -12,14 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206dc6c33f449a846917d7e3b3f05b48, type: 3}
   m_Name: Level07
   m_EditorClassIdentifier: 
-  data: '-666666-;
+  data: '-654321-;
 
-    >-5555-<;
+    -654456-;
 
-    ---44---;
+    -123456-;
 
-    --3333--;
-
-    -222222-;
-
-    11111111;'
+    -321123-;'

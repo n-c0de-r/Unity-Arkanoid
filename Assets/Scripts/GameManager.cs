@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelData[] levels;
 
     [Tooltip("The currently played level.")]
-    [SerializeField][Range(1,10)] private byte currentLevel;
+    [SerializeField][Range(1,9)] private byte currentLevel;
 
     [Space]
     [Header("Gameplay related objects")]
@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("The game object representing a brick.")]
     [SerializeField] private GameObject brickPrefab;
+
+    [Tooltip("The game object representing an indestructible block.")]
+    [SerializeField] private GameObject blockPrefab;
 
     [Tooltip("The game object representing an angle.")]
     [SerializeField] private GameObject anglePrefab;
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviour
 
 
     #region Fields
+
+    private const byte NR_BLOCK_TYPES = 6;
 
     private uint score, highScore;
 
@@ -71,68 +76,63 @@ public class GameManager : MonoBehaviour
     {
         string[] rows = data.Rows;
 
-        for (int rowNr = 0; rowNr < rows.Length; rowNr++)
+        for (byte rowNr = 0; rowNr < rows.Length; rowNr++)
         {
             char[] bricks = rows[rowNr].Trim().ToCharArray();
 
-            for (int brickNr = 0; brickNr < bricks.Length; brickNr++)
+            for (byte brickNr = 0; brickNr < bricks.Length; brickNr++)
             {
                 switch (bricks[brickNr])
                 {
                     case '-':
                         continue;
-
+                        // B for Blocking brick
                     case 'B':
-                        SpawnBrick(rowNr, brickNr, 7, false);
+                        SpawnElement(blockPrefab, rowNr, brickNr, 0, 7);
                         break;
-
+                        // Bouncy ball, for speedup
                     case 'O':
-                        SpawnBouncer(rowNr, brickNr);
+                        SpawnElement(bouncerPrefab, rowNr, brickNr);
                         break;
-
+                        // Triangles to change direction
                     case '^':
-                        SpawnAngle(rowNr, brickNr);
+                        SpawnElement(anglePrefab, rowNr, brickNr);
                         break;
 
                     case '<':
-                        SpawnAngle(rowNr, brickNr, 90);
+                        SpawnElement(anglePrefab, rowNr, brickNr, 90);
                         break;
 
                     case 'v':
-                        SpawnAngle(rowNr, brickNr, 180);
+                        SpawnElement(anglePrefab, rowNr, brickNr, 180);
                         break;
 
                     case '>':
-                        SpawnAngle(rowNr, brickNr, 270);
+                        SpawnElement(anglePrefab, rowNr, brickNr, 270);
                         break;
-
+                        // The actual colored bricks
                     default:
-                        SpawnBrick(rowNr, brickNr, bricks[brickNr], true);
+                        SpawnElement(brickPrefab, rowNr, brickNr, 0, (byte)bricks[brickNr]);
                         break;
                 }
             }
         }
     }
 
-    private void SpawnBrick(int row, int position, int brickValue, bool destructable)
+    private void SpawnElement(GameObject prefab, byte row, byte position, int rotation = 0, byte brickValue = 0)
     {
-        GameObject instance = Instantiate(brickPrefab, brickContainer);
-        instance.transform.position = (new Vector2(position * instance.transform.localScale.x, -row * instance.transform.localScale.y - 0.1f * row) + (Vector2)brickContainer.transform.position) * brickOffset;
-        Brick brick = instance.GetComponent<Brick>();
-        brick.Setup(brickValue, destructable);
-    }
+        int positionFactor = 1;
+        if (brickValue == NR_BLOCK_TYPES+1) positionFactor = 2; // Block bricks are half the size, need a different positioning
 
-    private void SpawnAngle(int row, int position, int rotation = 0)
-    {
-        GameObject instance = Instantiate(anglePrefab, brickContainer);
-        instance.transform.position = (new Vector2(position * instance.transform.localScale.x, -row * instance.transform.localScale.y - 0.1f * row) + (Vector2)brickContainer.transform.position) * brickOffset;
-        instance.transform.eulerAngles = new Vector3Int(0, 0, rotation);
-    }
+        GameObject instance = Instantiate(prefab, brickContainer);
 
-    private void SpawnBouncer(int row, int position)
-    {
-        GameObject instance = Instantiate(bouncerPrefab, brickContainer);
-        instance.transform.position = (new Vector2(position * instance.transform.localScale.x, -row * instance.transform.localScale.y - 0.1f * row) + (Vector2)brickContainer.transform.position) * brickOffset;
+        instance.transform.position = (new Vector2(position * (instance.transform.localScale.x * positionFactor), -row * instance.transform.localScale.y - 0.1f * row) + (Vector2)brickContainer.transform.position) * brickOffset;
+
+        // Only angles have a rotation value and need to be set.
+        if (rotation != 0) instance.transform.eulerAngles = new Vector3Int(0, 0, rotation);
+
+        // Setup a brick if it has the mathching component and the value is set (only bricks have life anyway)
+        if ((brickValue != 0 && brickValue % NR_BLOCK_TYPES <= NR_BLOCK_TYPES) && instance.TryGetComponent(out Brick brick)) brick.Setup(brickValue);
     }
 
     #endregion

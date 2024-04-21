@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206dc6c33f449a846917d7e3b3f05b48, type: 3}
   m_Name: Level02
   m_EditorClassIdentifier: 
-  data: '-111111-;
+  data: '31311313;
 
-    >------<;
+    B-B--B-B;
 
-    -;
-
-    -111111-;'
+    -1-11-1-;'

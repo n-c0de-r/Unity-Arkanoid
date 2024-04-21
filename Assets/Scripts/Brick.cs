@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Brick : MonoBehaviour
@@ -12,9 +13,6 @@ public class Brick : MonoBehaviour
 
     [Tooltip("The number of hits this brick element takes before it is destroyed.")]
     private byte life;
-
-    [Tooltip("Specifies if this brick element can destroyed.")]
-    private bool isDestructable;
 
     [Tooltip("The buff/nerf this brick element may give when destroyed.")]
     [SerializeField] private string possibleBuff, possibleNerf;
@@ -37,11 +35,28 @@ public class Brick : MonoBehaviour
 
     #region Methods
 
-    public void Setup(int brickLife, bool destructable = false)
+    public void Setup(byte brickLife)
     {
-        life = (byte)brickLife;
-        isDestructable = destructable;
+        life = brickLife;
         sprite.color = colors[brickLife % colors.Length];
+    }
+
+    public void Hit(byte damage)
+    {
+        life -= damage;
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // TODO: Play particles
+        sprite.color = colors[life % colors.Length];
+    }
+
+    private void OnDestroy()
+    {
+        //TODO
     }
 
     #endregion
