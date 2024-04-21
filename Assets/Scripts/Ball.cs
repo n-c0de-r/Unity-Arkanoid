@@ -1,11 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The representation of basic ball functions.
+/// </summary>
+[RequireComponent(typeof(AudioSource))]
 public class Ball : MonoBehaviour
 {
+    #region Serialized Fields
+
+    [Tooltip("The sound played when the ball hits something.")]
+    [SerializeField] private AudioSource sound;
+
+    #endregion
+
+
+    #region Unity Built-Ins
+
+    private void Awake()
+    {
+        TryGetComponent(out sound);
+    }
+
+    #endregion
+
+
+    #region Unity Events
+
     private void OnCollisionEnter2D(Collision2D target)
     {
+        sound.Play();
         if(target.gameObject.TryGetComponent(out Brick brick)) brick.Hit(1);
     }
+
+    #endregion
 }

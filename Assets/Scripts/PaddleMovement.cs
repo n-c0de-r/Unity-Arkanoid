@@ -10,7 +10,7 @@ public class PaddleMovement : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField] private Rigidbody2D paddleBody;
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 15f;
 
     #endregion
 

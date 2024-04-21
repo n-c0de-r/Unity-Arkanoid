@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("The currently played level.")]
     [SerializeField][Range(1,9)] private byte currentLevel;
 
+
     [Space]
     [Header("Gameplay related objects")]
 
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("The game object representing a bouncer.")]
     [SerializeField] private GameObject bouncerPrefab;
 
+
     [Space]
     [Header("Gameplay related information")]
 
@@ -48,7 +50,8 @@ public class GameManager : MonoBehaviour
 
     private const byte NR_BLOCK_TYPES = 7;
 
-    private uint score, highScore;
+    private uint _score, _highScore;
+    private byte _bricks;
 
     #endregion
 
@@ -113,6 +116,7 @@ public class GameManager : MonoBehaviour
                         // The actual colored bricks
                     default:
                         SpawnElement(brickPrefab, rowNr, brickNr, 0, (byte)(bricks[brickNr]-'0'));
+                        _bricks++;
                         break;
                 }
             }

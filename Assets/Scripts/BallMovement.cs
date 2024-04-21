@@ -8,9 +8,10 @@ public class BallMovement : MonoBehaviour
 {
     #region Serialized Fields
 
-    [SerializeField] private Rigidbody2D _ballBody;
+    [SerializeField] private Rigidbody2D ballBody;
 
     #endregion
+
 
     #region Fields
 
@@ -18,16 +19,17 @@ public class BallMovement : MonoBehaviour
 
     #endregion
 
+
     #region Unity Built-Ins
 
     private void Awake()
     {
-        TryGetComponent(out _ballBody);
+        TryGetComponent(out ballBody);
     }
 
     private void FixedUpdate()
     {
-        if (_ballBody.velocity.magnitude > MAX_SPEED) _ballBody.velocity = Vector2.ClampMagnitude(_ballBody.velocity, MAX_SPEED);
+        if (ballBody.velocity.magnitude > MAX_SPEED) ballBody.velocity = Vector2.ClampMagnitude(ballBody.velocity, MAX_SPEED);
     }
 
     #endregion

@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// Represents the data of a level as a 2D collection.
-/// Contains an array of <see cref="Row" />s
+/// Represents the data of a level as a string.
+/// Each row is a line separated by semicolons.
 /// </summary>
 [Serializable]
 [CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level")]

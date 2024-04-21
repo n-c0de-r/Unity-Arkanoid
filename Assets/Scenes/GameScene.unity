@@ -255,7 +255,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 60e5a85fed20b6a4cb689063e2511444, type: 2}
   - {fileID: 11400000, guid: 05f7d3f94af1e0643a9cedc892502722, type: 2}
   - {fileID: 11400000, guid: a08d49e797ee8c3429f1d8d74aa23a06, type: 2}
-  currentLevel: 1
+  currentLevel: 5
   brickContainer: {fileID: 57009187}
   brickPrefab: {fileID: 7912396968660424224, guid: 4a5e99622b522304f8412a74a11baab6, type: 3}
   blockPrefab: {fileID: 6994326686658851884, guid: a39d35a9d77eb6b4d9ebce4bd88a68d2, type: 3}
