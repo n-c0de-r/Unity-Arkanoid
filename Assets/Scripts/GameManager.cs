@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
                         break;
                         // The actual colored bricks
                     default:
-                        SpawnElement(brickPrefab, rowNr, brickNr, 0, (byte)bricks[brickNr]);
+                        SpawnElement(brickPrefab, rowNr, brickNr, 0, (byte)(bricks[brickNr] % NR_BLOCK_TYPES));
                         break;
                 }
             }
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
         if (rotation != 0) instance.transform.eulerAngles = new Vector3Int(0, 0, rotation);
 
         // Setup a brick if it has the mathching component and the value is set (only bricks have life anyway)
-        if ((brickValue != 0 && brickValue % NR_BLOCK_TYPES <= NR_BLOCK_TYPES) && instance.TryGetComponent(out Brick brick)) brick.Setup(brickValue);
+        if ((brickValue != 0 && brickValue <= NR_BLOCK_TYPES) && instance.TryGetComponent(out Brick brick)) brick.Setup(brickValue);
     }
 
     #endregion

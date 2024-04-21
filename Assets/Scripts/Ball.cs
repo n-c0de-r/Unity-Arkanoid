@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter2D(Collision2D target)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(target.gameObject.TryGetComponent(out Brick brick)) brick.Hit(1);
     }
 }
