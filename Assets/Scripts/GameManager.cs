@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     #region Fields
 
-    private const byte NR_BLOCK_TYPES = 6;
+    private const byte NR_BLOCK_TYPES = 7;
 
     private uint score, highScore;
 
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
                         continue;
                         // B for Blocking brick
                     case 'B':
-                        SpawnElement(blockPrefab, rowNr, brickNr, 0, 7);
+                        SpawnElement(blockPrefab, rowNr, brickNr, 0, NR_BLOCK_TYPES);
                         break;
                         // Bouncy ball, for speedup
                     case 'O':
@@ -112,17 +112,17 @@ public class GameManager : MonoBehaviour
                         break;
                         // The actual colored bricks
                     default:
-                        SpawnElement(brickPrefab, rowNr, brickNr, 0, (byte)(bricks[brickNr] % NR_BLOCK_TYPES));
+                        SpawnElement(brickPrefab, rowNr, brickNr, 0, (byte)(bricks[brickNr]-'0'));
                         break;
                 }
             }
         }
     }
 
-    private void SpawnElement(GameObject prefab, byte row, byte position, int rotation = 0, byte brickValue = 0)
+    private void SpawnElement(GameObject prefab, byte row, byte position, int rotation = 0, byte value = 0)
     {
         int positionFactor = 1;
-        if (brickValue == NR_BLOCK_TYPES+1) positionFactor = 2; // Block bricks are half the size, need a different positioning
+        if (value == NR_BLOCK_TYPES) positionFactor = 2; // Block bricks are half the size, need a different positioning
 
         GameObject instance = Instantiate(prefab, brickContainer);
 
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
         if (rotation != 0) instance.transform.eulerAngles = new Vector3Int(0, 0, rotation);
 
         // Setup a brick if it has the mathching component and the value is set (only bricks have life anyway)
-        if ((brickValue != 0 && brickValue <= NR_BLOCK_TYPES) && instance.TryGetComponent(out Brick brick)) brick.Setup(brickValue);
+        if ((value != 0 && value < NR_BLOCK_TYPES) && instance.TryGetComponent(out Brick brick)) brick.Setup(value);
     }
 
     #endregion

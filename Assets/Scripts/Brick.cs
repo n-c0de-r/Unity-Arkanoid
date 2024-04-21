@@ -12,7 +12,7 @@ public class Brick : MonoBehaviour
     [SerializeField] private Color[] colors;
 
     [Tooltip("The number of hits this brick element takes before it is destroyed.")]
-    private byte life;
+    private byte brickLife;
 
     [Tooltip("The buff/nerf this brick element may give when destroyed.")]
     [SerializeField] private string possibleBuff, possibleNerf;
@@ -35,23 +35,23 @@ public class Brick : MonoBehaviour
 
     #region Methods
 
-    public void Setup(byte brickLife)
+    public void Setup(byte life)
     {
-        life = brickLife;
-        sprite.color = colors[brickLife % colors.Length];
+        brickLife = life;
+        sprite.color = colors[life % colors.Length];
     }
 
     public void Hit(byte damage)
     {
-        life -= damage;
-        if (life <= 0)
+        brickLife -= damage;
+        if (brickLife <= 0)
         {
             Destroy(gameObject);
             return;
         }
 
         // TODO: Play particles
-        sprite.color = colors[life % colors.Length];
+        sprite.color = colors[brickLife % colors.Length];
     }
 
     private void OnDestroy()
