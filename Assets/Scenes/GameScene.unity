@@ -338,7 +338,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 6994326686658851884, guid: a39d35a9d77eb6b4d9ebce4bd88a68d2, type: 3}
   anglePrefab: {fileID: 3736744759905881818, guid: 3944fb9604816c04b95f1d2a3b342705, type: 3}
   bouncerPrefab: {fileID: 3996492358134286784, guid: 212fe3d41b2ab824a95721f8ff5f6ace, type: 3}
-  scoreCounter: {fileID: 0}
+  scoreCounter: {fileID: 1528532403}
   brickOffset: {x: 1.05, y: 1.05}
 --- !u!1001 &339455582
 PrefabInstance:
