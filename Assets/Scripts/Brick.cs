@@ -31,6 +31,12 @@ public class Brick : MonoBehaviour
 
     #region Fields
 
+    // Amount of score given on a hit
+    private const uint BASE_SCORE = 50;
+
+    [Tooltip("The amount of score this brick gives when it is destroyed.")]
+    private uint _brickScore;
+
     [Tooltip("The number of hits this brick element takes before it is destroyed.")]
     private byte _brickLife;
 
@@ -42,11 +48,6 @@ public class Brick : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out sprite);
-    }
-
-    private void Update()
-    {
-        
     }
 
     #endregion
@@ -62,6 +63,7 @@ public class Brick : MonoBehaviour
     {
         Color color = colors[life];
 
+        _brickScore = life * BASE_SCORE;
         _brickLife = life;
         sprite.color = color;
         symbol.sprite = symbols[life-1];
@@ -83,11 +85,15 @@ public class Brick : MonoBehaviour
         if (_brickLife <= 0)
         {
             particles.Explode();
+            GameManager.OnBrickHit.Invoke(_brickScore);
+            GameManager.OnBrickDeath.Invoke(1);
+
             Destroy(gameObject);
             return;
         }
 
         particles.Bricklets();
+        GameManager.OnBrickHit.Invoke(damage * BASE_SCORE);
 
         Color color = colors[_brickLife];
         sprite.color = color;
@@ -102,7 +108,7 @@ public class Brick : MonoBehaviour
 
     private void OnDestroy()
     {
-        //TODO message points
+        
     }
 
     #endregion

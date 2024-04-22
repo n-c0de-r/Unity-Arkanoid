@@ -9,6 +9,8 @@ public class PaddleMovement : MonoBehaviour
 {
     #region Serialized Fields
 
+    [SerializeField] private InputActionReference moveAction;
+
     [SerializeField] private Rigidbody2D paddleBody;
     [SerializeField] private float moveSpeed = 15f;
 
@@ -18,7 +20,6 @@ public class PaddleMovement : MonoBehaviour
     #region Fields
 
     private Vector2 _moveVector = Vector2.zero;
-    private InputActions _inputs;
 
     #endregion
 
@@ -27,7 +28,6 @@ public class PaddleMovement : MonoBehaviour
 
     private void Awake()
     {
-        _inputs = new InputActions();
         TryGetComponent(out paddleBody);
     }
 
@@ -43,16 +43,14 @@ public class PaddleMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputs.Enable();
-        _inputs.Player.Movement.performed += OnMovementPerformed;
-        _inputs.Player.Movement.canceled += OnMovementCanceled;
+        moveAction.action.performed += OnMovementPerformed;
+        moveAction.action.canceled += OnMovementCanceled;
     }
 
     private void OnDisable()
     {
-        _inputs.Disable();
-        _inputs.Player.Movement.performed -= OnMovementPerformed;
-        _inputs.Player.Movement.canceled -= OnMovementCanceled;
+        moveAction.action.performed -= OnMovementPerformed;
+        moveAction.action.canceled -= OnMovementCanceled;
     }
 
     private void OnMovementPerformed(InputAction.CallbackContext context)

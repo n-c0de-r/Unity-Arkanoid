@@ -1,4 +1,8 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 /// <summary>
 /// Manages the data of the game.
@@ -6,6 +10,9 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    public static Action<uint> OnBrickHit;
+    public static Action<byte> OnBrickDeath;
+
     #region Serialized Fields
     [Header("Level related values")]
 
@@ -137,6 +144,41 @@ public class GameManager : MonoBehaviour
 
         // Setup a brick if it has the mathching component and the value is set (only bricks have life anyway)
         if ((value != 0 && value < NR_BLOCK_TYPES) && instance.TryGetComponent(out Brick brick)) brick.Setup(value);
+    }
+
+    private void UpdateScore(uint points)
+    {
+        _score += points;
+        if (_score > _highScore) _highScore = _score;
+    }
+
+    private void UpdateBricks(byte amount)
+    {
+        _bricks -= amount;
+        if(_bricks == 0)
+        {
+            _score += (uint)(currentLevel * 1000);
+            SetupLevel(levels[currentLevel]);
+            currentLevel++;
+
+        }
+    }
+
+    #endregion
+
+
+    #region Unity Events
+
+    private void OnEnable()
+    {
+        OnBrickHit += UpdateScore;
+        OnBrickDeath += UpdateBricks;
+    }
+
+    private void OnDisable()
+    {
+        OnBrickHit -= UpdateScore;
+        OnBrickDeath -= UpdateBricks;
     }
 
     #endregion

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9006358036079881639}
+  - component: {fileID: 2208455966904166207}
   - component: {fileID: 8976938010963736646}
   - component: {fileID: 5940281473316091183}
   - component: {fileID: 9126633489753579818}
@@ -35,6 +36,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2208455966904166207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213821799612170008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0593ff16da3d9d46896cf3a023c18e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputs: {fileID: -944628639613478452, guid: fcc8a11f29076ec49a06054a43bf3f98, type: 3}
+  shootAction: {fileID: -8044043537887528117, guid: fcc8a11f29076ec49a06054a43bf3f98, type: 3}
 --- !u!114 &8976938010963736646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49493e0d61129ea42bcdf790d2099111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveAction: {fileID: 3064984449604574442, guid: fcc8a11f29076ec49a06054a43bf3f98, type: 3}
   paddleBody: {fileID: 9126633489753579818}
   moveSpeed: 10
 --- !u!212 &5940281473316091183
@@ -109,7 +125,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2213821799612170008}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

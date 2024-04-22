@@ -10,6 +10,9 @@ public class Ball : MonoBehaviour
 
     [Tooltip("The sound played when the ball hits something.")]
     [SerializeField] private AudioSource sound;
+    
+    [Tooltip("The trail effect then the ball moves.")]
+    [SerializeField] private ParticleSystem effect;
 
     #endregion
 

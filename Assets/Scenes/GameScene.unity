@@ -255,7 +255,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 60e5a85fed20b6a4cb689063e2511444, type: 2}
   - {fileID: 11400000, guid: 05f7d3f94af1e0643a9cedc892502722, type: 2}
   - {fileID: 11400000, guid: a08d49e797ee8c3429f1d8d74aa23a06, type: 2}
-  currentLevel: 5
+  currentLevel: 1
   brickContainer: {fileID: 57009187}
   brickPrefab: {fileID: 7912396968660424224, guid: 4a5e99622b522304f8412a74a11baab6, type: 3}
   blockPrefab: {fileID: 6994326686658851884, guid: a39d35a9d77eb6b4d9ebce4bd88a68d2, type: 3}
@@ -336,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9126633489753579818, guid: f9f88a35d8602174c9d21e691ee2b516, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9126633489753579818, guid: f9f88a35d8602174c9d21e691ee2b516, type: 3}
       propertyPath: m_Simulated
@@ -664,8 +664,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1542375464}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -673,81 +672,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1542375463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1542375464}
-  - component: {fileID: 1542375466}
-  - component: {fileID: 1542375465}
-  m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1542375464
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542375463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1308130052}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1542375465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542375463}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1542375466
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542375463}
-  m_CullTransparentMesh: 1
 --- !u!4 &1832238355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8951313561673109345, guid: 888a4c12934e4ba4e83ddfc0a8b791d0, type: 3}
@@ -857,9 +781,17 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1296481025
       objectReference: {fileID: 0}
+    - target: {fileID: 3492296957576436565, guid: 888a4c12934e4ba4e83ddfc0a8b791d0, type: 3}
+      propertyPath: initialSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3996492358134286784, guid: 888a4c12934e4ba4e83ddfc0a8b791d0, type: 3}
       propertyPath: m_Name
       value: Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 3996492358134286784, guid: 888a4c12934e4ba4e83ddfc0a8b791d0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8951313561673109345, guid: 888a4c12934e4ba4e83ddfc0a8b791d0, type: 3}
       propertyPath: m_LocalPosition.x
