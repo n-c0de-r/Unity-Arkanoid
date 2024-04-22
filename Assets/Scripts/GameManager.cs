@@ -1,8 +1,6 @@
 using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 /// <summary>
 /// Manages the data of the game.
@@ -40,6 +38,9 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("The game object representing a bouncer.")]
     [SerializeField] private GameObject bouncerPrefab;
+
+    [Tooltip("The UI representation of scores.")]
+    [SerializeField] private TMP_Text scoreCounter;
 
 
     [Space]
@@ -126,6 +127,7 @@ public class GameManager : MonoBehaviour
                         _bricks++;
                         break;
                 }
+
             }
         }
     }
@@ -150,6 +152,7 @@ public class GameManager : MonoBehaviour
     {
         _score += points;
         if (_score > _highScore) _highScore = _score;
+        scoreCounter.text = "" + _score;
     }
 
     private void UpdateBricks(byte amount)
@@ -160,7 +163,6 @@ public class GameManager : MonoBehaviour
             _score += (uint)(currentLevel * 1000);
             SetupLevel(levels[currentLevel]);
             currentLevel++;
-
         }
     }
 

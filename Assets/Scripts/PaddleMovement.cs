@@ -55,12 +55,14 @@ public class PaddleMovement : MonoBehaviour
 
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
+       // paddleBody.constraints = paddleBody.constraints | RigidbodyConstraints2D.FreezePositionX;
         _moveVector = context.ReadValue<Vector2>();
     }
 
     private void OnMovementCanceled(InputAction.CallbackContext context)
     {
         _moveVector = Vector2.zero;
+        // paddleBody.constraints = RigidbodyConstraints2D.FreezePositionX;
     }
 
     #endregion
