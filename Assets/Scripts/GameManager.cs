@@ -9,13 +9,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static Action<uint> OnBrickHit;
-    public static Action<byte> OnBrickDeath;
+    public static Action OnBrickDeath;
 
     #region Serialized Fields
+
     [Header("Level related values")]
 
     [Tooltip("All levels of this game.")]
     [SerializeField] private LevelData[] levels;
+
+    [Tooltip("The level's background image.")]
+    [SerializeField] private BackgroundManager backgrounds;
 
     [Tooltip("The currently played level.")]
     [SerializeField][Range(1,9)] private byte currentLevel;
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
     private const byte NR_BLOCK_TYPES = 7;
 
     private uint _score, _highScore;
-    private byte _bricks;
+    private byte _allBricks, _currentBricks;
 
     #endregion
 
@@ -67,24 +71,22 @@ public class GameManager : MonoBehaviour
     #region Unity Built-Ins
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetupLevel(levels[currentLevel-1]);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        OnBrickHit += UpdateScore;
+        OnBrickDeath += UpdateBricks;
     }
 
     #endregion
-
-
+    
+    
     #region Methods
 
     private void SetupLevel(LevelData data)
     {
+        backgrounds.Next(data.Back);
+
         string[] rows = data.Rows;
 
         for (byte rowNr = 0; rowNr < rows.Length; rowNr++)
@@ -97,15 +99,18 @@ public class GameManager : MonoBehaviour
                 {
                     case '-':
                         continue;
-                        // B for Blocking brick
+                        
+                    // B for Blocking brick
                     case 'B':
                         SpawnElement(blockPrefab, rowNr, brickNr, 0, NR_BLOCK_TYPES);
                         break;
-                        // Bouncy ball, for speedup
+                    
+                    // Bouncy ball, for speedup
                     case 'O':
                         SpawnElement(bouncerPrefab, rowNr, brickNr);
                         break;
-                        // Triangles to change direction
+                    
+                    // Triangles to change direction
                     case '^':
                         SpawnElement(anglePrefab, rowNr, brickNr);
                         break;
@@ -121,15 +126,17 @@ public class GameManager : MonoBehaviour
                     case '>':
                         SpawnElement(anglePrefab, rowNr, brickNr, 270);
                         break;
-                        // The actual colored bricks
+                    
+                    // The actual colored bricks
                     default:
                         SpawnElement(brickPrefab, rowNr, brickNr, 0, (byte)(bricks[brickNr]-'0'));
-                        _bricks++;
+                        _currentBricks++;
                         break;
                 }
 
             }
         }
+        _allBricks = _currentBricks;
     }
 
     private void SpawnElement(GameObject prefab, byte row, byte position, int rotation = 0, byte value = 0)
@@ -148,6 +155,8 @@ public class GameManager : MonoBehaviour
         if ((value != 0 && value < NR_BLOCK_TYPES) && instance.TryGetComponent(out Brick brick)) brick.Setup(value);
     }
 
+    
+
     private void UpdateScore(uint points)
     {
         _score += points;
@@ -155,10 +164,12 @@ public class GameManager : MonoBehaviour
         scoreCounter.text = "" + _score;
     }
 
-    private void UpdateBricks(byte amount)
+    private void UpdateBricks()
     {
-        _bricks -= amount;
-        if(_bricks == 0)
+        _currentBricks--;
+        backgrounds.FadeAlpha((float)_currentBricks / _allBricks);
+
+        if(_currentBricks == 0)
         {
             _score += (uint)(currentLevel * 1000);
             SetupLevel(levels[currentLevel]);
@@ -171,13 +182,7 @@ public class GameManager : MonoBehaviour
 
     #region Unity Events
 
-    private void OnEnable()
-    {
-        OnBrickHit += UpdateScore;
-        OnBrickDeath += UpdateBricks;
-    }
-
-    private void OnDisable()
+    private void OnDestroy()
     {
         OnBrickHit -= UpdateScore;
         OnBrickDeath -= UpdateBricks;

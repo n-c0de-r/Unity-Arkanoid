@@ -17,6 +17,9 @@ public class LevelData : ScriptableObject
     [TextArea(6, 10)]
     [SerializeField] private string data;
 
+    [Tooltip("The background displayed on this level.")]
+    [SerializeField] private Sprite background;
+
     #endregion
 
 
@@ -25,6 +28,8 @@ public class LevelData : ScriptableObject
     public string Data => data;
     
     public string[] Rows => data.Split(';');
+
+    public Sprite Back => background;
 
     #endregion
 }

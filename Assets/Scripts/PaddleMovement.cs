@@ -17,23 +17,13 @@ public class PaddleMovement : MonoBehaviour
     #endregion
 
 
-    #region Fields
-
-    private Vector2 _moveVector = Vector2.zero;
-
-    #endregion
-
-
     #region Unity Built-Ins
 
     private void Awake()
     {
         TryGetComponent(out paddleBody);
-    }
-
-    private void FixedUpdate()
-    {
-        paddleBody.velocity = moveSpeed * _moveVector;
+        moveAction.action.performed += OnMovementPerformed;
+        moveAction.action.canceled += OnMovementCanceled;
     }
 
     #endregion
@@ -41,13 +31,7 @@ public class PaddleMovement : MonoBehaviour
 
     #region Unity Events
 
-    private void OnEnable()
-    {
-        moveAction.action.performed += OnMovementPerformed;
-        moveAction.action.canceled += OnMovementCanceled;
-    }
-
-    private void OnDisable()
+    private void OnDestroy()
     {
         moveAction.action.performed -= OnMovementPerformed;
         moveAction.action.canceled -= OnMovementCanceled;
@@ -55,15 +39,16 @@ public class PaddleMovement : MonoBehaviour
 
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
-       // paddleBody.constraints = paddleBody.constraints | RigidbodyConstraints2D.FreezePositionX;
-        _moveVector = context.ReadValue<Vector2>();
+        paddleBody.constraints = RigidbodyConstraints2D.FreezeAll ^ RigidbodyConstraints2D.FreezePositionX;
+        paddleBody.velocity = moveSpeed * context.ReadValue<Vector2>();
+
     }
 
     private void OnMovementCanceled(InputAction.CallbackContext context)
     {
-        _moveVector = Vector2.zero;
-        // paddleBody.constraints = RigidbodyConstraints2D.FreezePositionX;
-    }
+        paddleBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        paddleBody.velocity = Vector2.zero;
 
+    }
     #endregion
 }

@@ -86,7 +86,7 @@ public class Brick : MonoBehaviour
         {
             particles.Explode();
             GameManager.OnBrickHit.Invoke(_brickScore);
-            GameManager.OnBrickDeath.Invoke(1);
+            GameManager.OnBrickDeath.Invoke();
 
             Destroy(gameObject);
             return;
