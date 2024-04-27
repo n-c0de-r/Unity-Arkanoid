@@ -20,16 +20,19 @@ public class LevelData : ScriptableObject
     [Tooltip("The background displayed on this level.")]
     [SerializeField] private Sprite background;
 
+    [Tooltip("The music played in this level.")]
+    [SerializeField] private Music music;
+
     #endregion
 
 
     #region GetSets
 
     public string Data => data;
-    
     public string[] Rows => data.Split(';');
-
     public Sprite Back => background;
+    public AudioClip Music => music.clip;
+    public string MusicName => music.name;
 
     #endregion
 }
