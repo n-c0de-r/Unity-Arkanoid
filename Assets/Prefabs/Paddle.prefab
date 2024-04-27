@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2208455966904166207}
   - component: {fileID: 8976938010963736646}
   - component: {fileID: 5940281473316091183}
+  - component: {fileID: 2716046735673544948}
   - component: {fileID: 9126633489753579818}
-  - component: {fileID: 4429074415894426676}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputs: {fileID: -944628639613478452, guid: fcc8a11f29076ec49a06054a43bf3f98, type: 3}
   shootAction: {fileID: -8044043537887528117, guid: fcc8a11f29076ec49a06054a43bf3f98, type: 3}
+  ball: {fileID: 3492296957576436565, guid: 888a4c12934e4ba4e83ddfc0a8b791d0, type: 3}
 --- !u!114 &8976938010963736646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,34 +118,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &9126633489753579818
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2213821799612170008}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1000
-  m_LinearDrag: 1
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: e0694449e6251ca4a89a465faa5211ad, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!60 &4429074415894426676
+--- !u!60 &2716046735673544948
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,12 +162,37 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5, y: 0.5}
-      - {x: 0.125, y: 0.1}
-      - {x: -0.125, y: 0.1}
-      - {x: -0.5, y: 0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: 0, y: -0.5}
+    - - {x: -0.2, y: 0.25}
+      - {x: 0.2, y: 0.25}
+      - {x: 0.5, y: 0.5}
       - {x: 0.5, y: -0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: -0.5, y: 0.5}
   m_UseDelaunayMesh: 0
+--- !u!50 &9126633489753579818
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213821799612170008}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: e0694449e6251ca4a89a465faa5211ad, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

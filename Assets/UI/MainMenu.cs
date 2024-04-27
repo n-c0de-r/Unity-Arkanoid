@@ -4,15 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void ChangeScene(int sceneID)
-    {
-        SceneManager.LoadScene(sceneID);
-    }
-
+    /// <summary>
+    /// Loads the given scene.
+    /// </summary>
+    /// <param name="scene">Scene Asset file.</param>
     public void LoadScene(SceneAsset scene)
-    {
-        SceneManager.LoadScene(scene.name);
-    }
+        => SceneManager.LoadScene(scene.name);
 
     /// <summary>
     /// Quits the application or editor.
@@ -23,11 +20,5 @@ public class MainMenu : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
     #endif
         Application.Quit();
-    }
-
-    public void TogglePlay(bool running)
-    {
-        GameData.Reset();
-        GameData.isRunning = running;
     }
 }

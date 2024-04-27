@@ -7,23 +7,21 @@ public class Paddle : MonoBehaviour
 
     [SerializeField] private InputActionAsset inputs;
     [SerializeField] private InputActionReference shootAction;
+    [SerializeField] private BallMovement ball;
 
     #endregion
 
 
     #region Fields
 
-    [Tooltip("The initial position to reset to after it is destroyed.")]
-    private Vector2 _initialPosition;
+
 
     #endregion
 
 
     #region Unity Built-Ins
 
-    private void FixedUpdate()
-    {
-    }
+
 
     #endregion
 
@@ -44,7 +42,8 @@ public class Paddle : MonoBehaviour
 
     private void OnShootPerformed(InputAction.CallbackContext context)
     {
-        if (context.performed) Debug.Log("Shoot");
+        if (ball.gameObject.activeInHierarchy) return;
+        ball.Shoot(gameObject.transform.position, Vector2.right + Vector2.up);
     }
 
     #endregion

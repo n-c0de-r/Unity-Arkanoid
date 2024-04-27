@@ -1,6 +1,8 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manages the data of the game.
@@ -9,7 +11,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static Action<uint> OnBrickHit;
-    public static Action OnBrickDeath;
+    public static Action OnBrickDeath, OnBallLost;
 
     #region Serialized Fields
 
@@ -27,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     [Space]
     [Header("Gameplay related objects")]
+
+    [Tooltip("The game object playing the level music.")]
+    [SerializeField] private AudioSource audioPlayer;
 
     [Tooltip("The game object holding all the brick elements.")]
     [SerializeField] private Transform brickContainer;
@@ -46,6 +51,9 @@ public class GameManager : MonoBehaviour
     [Tooltip("The UI representation of scores.")]
     [SerializeField] private TMP_Text scoreCounter;
 
+    [Tooltip("The UI representation of lifes.")]
+    [SerializeField] private Slider life;
+
 
     [Space]
     [Header("Gameplay related information")]
@@ -62,6 +70,8 @@ public class GameManager : MonoBehaviour
 
     private const byte NR_BLOCK_TYPES = 7;
 
+    private byte _ballCounter = 3;
+
     private uint _score, _highScore;
     private byte _allBricks, _currentBricks;
 
@@ -76,6 +86,8 @@ public class GameManager : MonoBehaviour
         SetupLevel(levels[currentLevel-1]);
         OnBrickHit += UpdateScore;
         OnBrickDeath += UpdateBricks;
+        OnBallLost += UpdateLife;
+        life.value = _ballCounter;
     }
 
     #endregion
@@ -83,11 +95,11 @@ public class GameManager : MonoBehaviour
     
     #region Methods
 
-    private void SetupLevel(LevelData data)
+    private void SetupLevel(LevelData levelData)
     {
-        backgrounds.Next(data.Back);
+        backgrounds.Next(levelData.Back);
 
-        string[] rows = data.Rows;
+        string[] rows = levelData.Rows;
 
         for (byte rowNr = 0; rowNr < rows.Length; rowNr++)
         {
@@ -137,6 +149,8 @@ public class GameManager : MonoBehaviour
             }
         }
         _allBricks = _currentBricks;
+        audioPlayer.clip = levelData.Music;
+        audioPlayer.Play();
     }
 
     private void SpawnElement(GameObject prefab, byte row, byte position, int rotation = 0, byte value = 0)
@@ -161,7 +175,8 @@ public class GameManager : MonoBehaviour
     {
         _score += points;
         if (_score > _highScore) _highScore = _score;
-        scoreCounter.text = "" + _score;
+        if (_score % 100000 == 0) UpdateLife(1);
+        scoreCounter.text = "" + _score.ToString("D6");
     }
 
     private void UpdateBricks()
@@ -177,6 +192,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void UpdateLife()
+    {
+        _ballCounter--;
+        if (_ballCounter == 0) SceneManager.LoadScene(0);
+        life.value = _ballCounter;
+    }
+    private void UpdateLife(byte lifeUp)
+    {
+        _ballCounter = (byte)Math.Clamp(_ballCounter+lifeUp, 1, 10);
+        life.value = _ballCounter;
+    }
+
     #endregion
 
 
@@ -186,6 +213,7 @@ public class GameManager : MonoBehaviour
     {
         OnBrickHit -= UpdateScore;
         OnBrickDeath -= UpdateBricks;
+        OnBallLost -= UpdateLife;
     }
 
     #endregion

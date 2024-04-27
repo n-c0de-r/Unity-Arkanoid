@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,7 +13,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private AudioSource sound;
     
     [Tooltip("The trail effect then the ball moves.")]
-    [SerializeField] private ParticleSystem effect;
+    [SerializeField] private ParticleSystem effect, trail;
 
     #endregion
 
@@ -34,6 +35,9 @@ public class Ball : MonoBehaviour
         sound.Play();
         if(target.gameObject.TryGetComponent(out Brick brick)) brick.Hit(1);
     }
+
+    private void OnEnable() => effect.Play();
+    private void OnDisable() => effect.Stop();
 
     #endregion
 }

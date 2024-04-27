@@ -10,7 +10,12 @@ public class BallMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D ballBody;
     [SerializeField] [Range(1,5)] private float initialSpeed = 2.0f;
-    [SerializeField][Range(5, 10)] private const float maxSpeed = 10;
+    [SerializeField] [Range(5, 10)] private const float maxSpeed = 10;
+
+    #endregion
+
+
+    #region Fileds
 
     #endregion
 
@@ -20,7 +25,6 @@ public class BallMovement : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out ballBody);
-        Shoot(Vector2.right + Vector2.up);
     }
 
     private void FixedUpdate()
@@ -34,11 +38,15 @@ public class BallMovement : MonoBehaviour
     #region Methods
 
     /// <summary>
-    /// Shoots the magic ball in a given direction.
+    /// Shoots the ball in a given direction.
     /// </summary>
-    /// <param name="direction">The direction to shoot at.</param>
-    public void Shoot(Vector2 direction)
+    /// <param name="startPosition">The position where the shot starts.</param>
+    /// <param name="direction">The direction of shooting.</param>
+    public void Shoot(Vector2 startPosition, Vector2 direction)
     {
+        gameObject.transform.position = startPosition + new Vector2(0, 0.5f);
+        ballBody.velocity = Vector2.zero;
+        gameObject.SetActive(true);
         ballBody.velocity = initialSpeed * direction;
     }
 
