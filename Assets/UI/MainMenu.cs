@@ -4,6 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    #region Serialized Fields
+
+    [SerializeField] private Settings dafaultSettings;
+
+    #endregion
+
+
+    #region Methods
+
     /// <summary>
     /// Loads the given scene.
     /// </summary>
@@ -21,4 +30,6 @@ public class MainMenu : MonoBehaviour
     #endif
         Application.Quit();
     }
+
+    #endregion
 }
