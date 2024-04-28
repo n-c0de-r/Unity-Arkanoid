@@ -21,7 +21,7 @@ public class LevelData : ScriptableObject
     [SerializeField] private Sprite background;
 
     [Tooltip("The music played in this level.")]
-    [SerializeField] private Music music;
+    [SerializeField] private AudioClip music;
 
     #endregion
 
@@ -31,7 +31,7 @@ public class LevelData : ScriptableObject
     public string Data => data;
     public string[] Rows => data.Split(';');
     public Sprite Back => background;
-    public AudioClip Music => music.clip;
+    public AudioClip Music => music;
     public string MusicName => music.name;
 
     #endregion

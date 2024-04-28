@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour
             }
         }
         _allBricks = _currentBricks;
+        audioPlayer.Stop();
         audioPlayer.clip = levelData.Music;
         audioPlayer.Play();
     }

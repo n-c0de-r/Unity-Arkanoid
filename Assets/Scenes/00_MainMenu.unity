@@ -461,6 +461,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 634662792224048643, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 534740930875361856}
+    - target: {fileID: 634662792224048643, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
     - target: {fileID: 729376425579156314, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -597,6 +605,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4872213184496550982, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6895237817038120538, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -642,6 +654,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}
+--- !u!114 &534740930875361856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 256028243184367147, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}
+  m_PrefabInstance: {fileID: 534740930875361855}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01152daca9e91c84790b1f0723cb9fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7372767086044692541 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3033265160570946585, guid: 39367ee0a00c30f46842e64d5ce3671d, type: 3}

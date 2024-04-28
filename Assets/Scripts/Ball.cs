@@ -36,7 +36,12 @@ public class Ball : MonoBehaviour
         if(target.gameObject.TryGetComponent(out Brick brick)) brick.Hit(1);
     }
 
-    private void OnEnable() => effect.Play();
+    private void OnEnable()
+    {
+        effect.Play();
+        sound.Play();
+    }
+
     private void OnDisable() => effect.Stop();
 
     #endregion
