@@ -8,8 +8,9 @@ public class Settings : ScriptableObject
 {
     #region Fields
 
+    [SerializeField] private Difficulty baseDifficulty = Difficulty.EASY;
+    [SerializeField] private float mainVolume = -20.0f, musicVolume = 0.0f, soundVolume = 0.0f;
     [SerializeField] private int lives = 3, players = 1;
-    [SerializeField] private Difficulty baseDifficulty;
 
     #endregion
 
@@ -35,7 +36,37 @@ public class Settings : ScriptableObject
         set => players = Mathf.Clamp(value, 1, 4);
     }
 
+    /// <summary>
+    /// The Difficulty set in the current game.
+    /// </summary>
     public Difficulty BaseDifficulty { get => baseDifficulty; set => baseDifficulty = value; }
+
+    /// <summary>
+    /// The main volume value set by the player.
+    /// </summary>
+    public float MainVolume
+    {
+        get => mainVolume;
+        set => mainVolume = value;
+    }
+
+    /// <summary>
+    /// The music volume value set by the player.
+    /// </summary>
+    public float MusicVolume
+    {
+        get => musicVolume;
+        set => musicVolume = value;
+    }
+
+    /// <summary>
+    /// The sound volume value set by the player.
+    /// </summary>
+    public float SoundVolume
+    {
+        get => soundVolume;
+        set => soundVolume = value;
+    }
 
     #endregion
 }

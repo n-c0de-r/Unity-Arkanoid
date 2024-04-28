@@ -18,6 +18,4 @@ MonoBehaviour:
 
     -1-11-1-;'
   background: {fileID: 268828376, guid: 7fa2bbd8e36f6f640a3898c389ed1c1a, type: 3}
-  music:
-    name: 
-    clip: {fileID: 8300000, guid: f7a02cb7515bdac448a84528f24af9fa, type: 3}
+  music: {fileID: 8300000, guid: 89d367e64622fa647b2ff80328df1cf4, type: 3}
